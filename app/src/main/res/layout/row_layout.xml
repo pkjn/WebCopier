@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true">
+        <LinearLayout
+            android:padding="6dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/icons"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="10dp"
+                android:background="@drawable/round_textview"
+                android:layout_margin="3dp"
+                android:layout_height="match_parent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size"
+                    android:padding="8dp"
+                    android:textStyle="bold"
+                    android:text="Title"
+                    android:textColor="@color/primary_text"/>
+
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:drawableLeft="@drawable/clock"
+                        android:drawablePadding="5dp"
+                        android:text="Date"
+                        android:paddingLeft="4dp"
+                        android:textColor="@color/primary_text"/>
+
+                <android.support.v7.widget.CardView
+                    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    cardview:cardElevation="3dp"
+                    cardview:cardCornerRadius="5dp"
+                    cardview:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/cardview_buttons">
+
+                    <ImageButton
+                        android:id="@+id/download_button"
+                        android:layout_weight="0.3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Delete"
+                        android:src="@drawable/arrows"
+                        android:background="@android:color/transparent"
+                        />
+
+
+                    <ImageButton
+                        android:layout_weight="0.3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Delete"
+                        android:src="@drawable/delete"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/delete_button"/>
+
+
+                    <ImageButton
+                        android:layout_weight="0.3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/settings_button" />
+
+                </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                    android:id="@+id/progress_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    app:rcBackgroundColor="@color/divider"
+                    app:rcBackgroundPadding="3dp"
+                    app:rcMax="100"
+                    app:rcProgressColor="@color/primary_dark"
+                    app:rcRadius="5dp"
+                    app:rcTextProgress="text progress"
+                    app:rcTextProgressColor="@color/icons"
+                    app:rcTextProgressMargin="10dp"
+                    app:rcTextProgressSize="14sp" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

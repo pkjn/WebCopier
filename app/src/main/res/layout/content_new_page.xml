@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@color/icons"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.prateekjain.offlinebrowser.NewPage"
+    tools:showIn="@layout/activity_new_page">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:id="@+id/url_webpage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter URL"
+            android:inputType="textUri"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:id="@+id/title_webpage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Title"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view_download_image"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true"
+        cardview:contentPadding="6dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Download Images"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:id="@+id/downloadImages"
+                android:checked="true" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view_download_script"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true"
+        cardview:contentPadding="6dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Download Scripts"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:id="@+id/downloadScript"
+                android:checked="true" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view_download_pdf"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true"
+        cardview:contentPadding="6dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Download Pdf"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:id="@+id/downloadPdf"
+                android:checked="true" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view_max_depth"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true"
+        cardview:contentPadding="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Max Depth "/>
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MyApp.HeaderBar.Spinner"
+                android:entries="@array/depth_spinner"
+                android:id="@+id/depthSpinner"/>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view_max_links"
+        android:layout_gravity="center_horizontal"
+        cardview:cardElevation="3dp"
+        cardview:cardCornerRadius="5dp"
+        android:paddingLeft="8dp"
+        android:foreground="@drawable/card_foreground"
+        cardview:cardUseCompatPadding="true"
+        cardview:contentPadding="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Max Links per page"/>
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MyApp.HeaderBar.Spinner"
+                android:entries="@array/maxlinks_spinner"
+                android:id="@+id/linksSpinner"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView></LinearLayout>

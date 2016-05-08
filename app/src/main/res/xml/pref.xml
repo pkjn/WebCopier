@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="Select Items To Download" >
+        <CheckBoxPreference
+            android:key="imageDownload"
+            android:checked="true"
+            android:title="Images" />
+
+        <CheckBoxPreference
+            android:key="pdfDownload"
+            android:title="Pdf Files" />
+
+        <CheckBoxPreference
+            android:key="scriptDownload"
+            android:checked="true"
+            android:title="Scripts" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Depth And Level" >
+        <ListPreference
+            android:entries="@array/depthOptions"
+            android:entryValues="@array/depthValues"
+            android:key="maxDepth"
+            android:summary="Max Depth Level For Links"
+            android:title="Max Depth" />
+        <ListPreference
+            android:entries="@array/linkOptions"
+            android:entryValues="@array/linkValues"
+            android:key="maxLinks"
+            android:summary="Max Links Per Page"
+            android:title="Max Links" />
+    </PreferenceCategory>
+</PreferenceScreen>  
