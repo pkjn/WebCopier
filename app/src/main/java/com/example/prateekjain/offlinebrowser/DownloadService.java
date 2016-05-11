@@ -350,6 +350,7 @@ public class DownloadService extends IntentService {
             count++;
             if(max_size<queue.size())
                 max_size=queue.size();
+            Log.d("titles",title_show);
             publishResults(title_show,"DOWNLOADING",count,queue.size(),max_size);
             s=queue.poll();
             if(s.equals(Integer.toString(level))){

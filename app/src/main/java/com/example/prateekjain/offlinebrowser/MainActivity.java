@@ -204,8 +204,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
             return;
         }
 
-        detail.title=detail.title.replaceAll(" ","");
-        String filePath=getExternalFilesDir(null) + "/OfflineBrowser/" + detail.title + "/index.html";
+        String title=detail.title.replaceAll(" ","");
+        String filePath=getExternalFilesDir(null) + "/OfflineBrowser/" + title + "/index.html";
         if(!new File(filePath).exists()){
             Snackbar.make(findViewById(android.R.id.content), "Website is Interrupted, Download Again!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             return;
@@ -220,8 +220,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
             startActivity(chooser);
         }
         catch(Exception e){}
-
-
     }
 
     @Override

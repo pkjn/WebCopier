@@ -77,6 +77,8 @@ public class NewPage extends AppCompatActivity {
             title.setFocusable(false);
             title.setEnabled(false);
             url.setText(details.link);
+            url.setFocusable(false);
+            url.setEnabled(false);
             image.setChecked(Boolean.valueOf(details.imageDownload));
             pdf.setChecked(Boolean.valueOf(details.pdfDownload));
             script.setChecked(Boolean.valueOf(details.scriptDownload));
@@ -88,6 +90,8 @@ public class NewPage extends AppCompatActivity {
 
     private void validateAndReturn(View view) {
         String urlToSave=url.getText().toString();
+        if(urlToSave.contains("https"))
+            urlToSave=urlToSave.replace("https","http");
         if(!urlToSave.contains("http")){
             urlToSave="http://"+urlToSave;
         }

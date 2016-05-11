@@ -3,6 +3,7 @@ package com.example.prateekjain.offlinebrowser;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -121,13 +123,41 @@ public class WebViewActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
-        wv1.getSettings().setLoadWithOverviewMode(true);
-        wv1.getSettings().setUseWideViewPort(true);
-        wv1.setScrollbarFadingEnabled(false);
-        wv1.getSettings().setBuiltInZoomControls(true);
-        wv1.getSettings().setLoadsImagesAutomatically(true);
-        wv1.getSettings().setJavaScriptEnabled(true);
-        wv1.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+
+
+
+        wv1.setDrawingCacheBackgroundColor(0);
+        wv1.setFocusableInTouchMode(true);
+        wv1.setFocusable(true);
+        wv1.setAnimationCacheEnabled(false);
+        wv1.setDrawingCacheEnabled(true);
+        wv1.setWillNotCacheDrawing(false);
+        wv1.setAlwaysDrawnWithCacheEnabled(true);
+        wv1.setScrollbarFadingEnabled(true);
+        wv1.setHorizontalScrollBarEnabled(false);
+        WebSettings settings = wv1.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
+        if (Build.VERSION.SDK_INT > 16) {
+            settings.setAllowUniversalAccessFromFileURLs(true);
+            settings.setAllowFileAccessFromFileURLs(true);
+            settings.setAllowFileAccess(true);
+        }
+        settings.setAppCacheEnabled(false);
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        if (Build.VERSION.SDK_INT >= 19) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
+
+
         wv1.loadUrl(url);
 
 
