@@ -30,6 +30,7 @@
             android:orientation="vertical"
             android:layout_height="wrap_content"
             android:weightSum="1">
+            <!--
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
             android:inputType="textUri"
             android:maxLines="1"
             android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
+    </android.support.design.widget.TextInputLayout>-->
 
             <com.github.silvestrpredko.dotprogressbar.DotProgressBar
                 xmlns:custom="http://schemas.android.com/apk/res-auto"

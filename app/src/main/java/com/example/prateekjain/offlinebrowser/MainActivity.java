@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 .setName(db_name)
                 .setVersion(2)
                 .setLogLevel(Ollie.LogLevel.FULL)
-                .setCacheSize(100)
+                .setCacheSize(1)
                 .init();
         recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
         adapter=new MyAdapter(getApplicationContext(),getData());

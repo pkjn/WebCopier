@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/diskette"
-        app:layout_anchor="@id/toolbar"
-        app:layout_anchorGravity="bottom|end" />
+        android:layout_gravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>

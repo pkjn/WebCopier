@@ -1,36 +1,32 @@
 package com.example.prateekjain.offlinebrowser;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 
-public class WebViewActivity extends AppCompatActivity {
-    EditText link;
+public class WebViewActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    //EditText link;
     WebView wv1;
     DotProgressBar progressBar;
     String textUrl="";
-
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +41,8 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("urlToSave",link.getText().toString());
+                //intent.putExtra("urlToSave",link.getText().toString());
+                intent.putExtra("urlToSave",textUrl);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -53,21 +50,23 @@ public class WebViewActivity extends AppCompatActivity {
         });
 
 
-        link=(EditText)findViewById(R.id.webview_url);
-        link.setSelectAllOnFocus(true);
-        link.clearFocus();
+        //link=(EditText)findViewById(R.id.webview_url);
+        //link.setSelectAllOnFocus(true);
+        //link.clearFocus();
         wv1=(WebView)findViewById(R.id.webView);
         progressBar = (DotProgressBar) findViewById(R.id.dot_progress_bar);
         progressBar.setVisibility(View.GONE);
         String url = getIntent().getDataString();
+
         if(url==null){
             startWebView("http://www.google.com");
         }
         else{
-            link.setText(url);
+            //link.setText(url);
+            textUrl=url;
             startWebView(url);
         }
-        link.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /*link.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
@@ -92,7 +91,7 @@ public class WebViewActivity extends AppCompatActivity {
                     return false;
                 }
             }
-        });
+        });*/
 
     }
     private void startWebView(String url) {
@@ -101,7 +100,8 @@ public class WebViewActivity extends AppCompatActivity {
             //If you will not use this method url links are opeen in new brower not in webview
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-                link.setText(url);
+                textUrl=url;
+                searchView.setQuery(textUrl,false);
                 view.loadUrl(url);
                 progressBar.setVisibility(View.VISIBLE);
                 return true;
@@ -122,20 +122,17 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
-                link.setText(url);
+                //link.setText(url);
+                textUrl=url;
+                searchView.setQuery(textUrl,false);
             }
         });
-
-
-
 
         wv1.setDrawingCacheBackgroundColor(0);
         wv1.setFocusableInTouchMode(true);
         wv1.setFocusable(true);
-        wv1.setAnimationCacheEnabled(false);
         wv1.setDrawingCacheEnabled(true);
         wv1.setWillNotCacheDrawing(false);
-        wv1.setAlwaysDrawnWithCacheEnabled(true);
         wv1.setScrollbarFadingEnabled(true);
         wv1.setHorizontalScrollBarEnabled(false);
         WebSettings settings = wv1.getSettings();
@@ -158,15 +155,23 @@ public class WebViewActivity extends AppCompatActivity {
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-
-
         wv1.loadUrl(url);
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_web_view, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setQuery(textUrl,true);
+            }
+        });
         return true;
     }
 
@@ -188,4 +193,31 @@ public class WebViewActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        progressBar.setVisibility(View.VISIBLE);
+        textUrl=query;
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+        }
+        String url=textUrl;
+        if(!url.contains("http") && !url.contains("file")){
+            if(Patterns.WEB_URL.matcher(("http://"+url)).matches()){
+                url="http://"+url;
+            }
+            else{
+                url="https://www.google.com/search?q="+url;
+            }
+        }
+        startWebView(url);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
 }
