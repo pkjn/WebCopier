@@ -110,6 +110,7 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 //method to handle PAGE NOT AVAILABLE
+
             }
 
             @TargetApi(android.os.Build.VERSION_CODES.M)
@@ -121,6 +122,7 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                link.setText(url);
             }
         });
 

@@ -33,4 +33,13 @@
             android:summary="Max Links Per Page"
             android:title="Max Links" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Default Browser" >
+        <ListPreference
+            android:entries="@array/defaultBrowser"
+            android:entryValues="@array/defaultValues"
+            android:key="defaultBrowser"
+            android:title="Set Default Browser" />
+    </PreferenceCategory>
 </PreferenceScreen>  

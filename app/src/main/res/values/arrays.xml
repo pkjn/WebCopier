@@ -15,7 +15,18 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string-array name="defaultBrowser">
+        <item>Choose on click</item>
+        <item>@string/app_name</item>
+    </string-array>
 
+    <string-array name="defaultValues">
+        <item>choose</item>
+        <item>@string/app_name</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 
     <string-array name="linkOptions">
         <item>5</item>

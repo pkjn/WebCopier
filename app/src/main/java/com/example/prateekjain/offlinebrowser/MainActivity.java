@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 .setName(db_name)
                 .setVersion(2)
                 .setLogLevel(Ollie.LogLevel.FULL)
-                .setCacheSize(1024)
+                .setCacheSize(100)
                 .init();
         recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
         adapter=new MyAdapter(getApplicationContext(),getData());
@@ -211,15 +213,27 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
             return;
         }
         String urlVisit="file://"+filePath;
-        try
-        {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setDataAndType(Uri.parse(urlVisit), "text/*");
-            i.addCategory(Intent.CATEGORY_BROWSABLE);
-            Intent chooser=Intent.createChooser(i,"Open With");
-            startActivity(chooser);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String defaultBrowser = prefs.getString("defaultBrowser", "choose");
+        Log.d("default",":"+defaultBrowser+":"+getString(R.string.app_name)+":");
+        if(defaultBrowser.equals(getString(R.string.app_name))){
+            Log.d("default",defaultBrowser+"  "+getString(R.string.app_name));
+            Intent i = new Intent(getApplicationContext(),WebViewActivity.class);
+            i.setData(Uri.parse(urlVisit));
+            startActivity(i);
         }
-        catch(Exception e){}
+        else{
+            try
+            {
+                Log.d("default","inside choose");
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setDataAndType(Uri.parse(urlVisit), "text/html");
+                Intent chooser=Intent.createChooser(i,"Open With");
+                startActivity(chooser);
+            }
+            catch(Exception e){}
+        }
     }
 
     @Override

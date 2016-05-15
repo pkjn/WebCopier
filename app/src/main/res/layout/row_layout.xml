@@ -79,7 +79,7 @@
 
                     <ImageButton
                         android:id="@+id/download_button"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.25"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="Delete"
@@ -89,7 +89,7 @@
 
 
                     <ImageButton
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.25"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="Delete"
@@ -99,13 +99,12 @@
 
 
                     <ImageButton
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.25"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/icon"
                         android:background="@android:color/transparent"
                         android:id="@+id/settings_button" />
-
                 </LinearLayout>
                 </android.support.v7.widget.CardView>
 
