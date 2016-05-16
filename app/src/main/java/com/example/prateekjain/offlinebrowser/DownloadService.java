@@ -79,6 +79,7 @@ public class DownloadService extends IntentService {
                     continue;
                 }
                 String src=image.attr("abs:src");
+                Log.d("script-image",src);
                 src=src.replace("../", "");
                 URL url = new URL(src);
                 src=url.getPath();

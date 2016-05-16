@@ -9,6 +9,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
     DotProgressBar progressBar;
     String textUrl="";
     SearchView searchView;
+    boolean flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
                 textUrl=url;
+                //if(!flag)
                 searchView.setQuery(textUrl,false);
                 view.loadUrl(url);
                 progressBar.setVisibility(View.VISIBLE);
@@ -124,6 +127,7 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
                 progressBar.setVisibility(View.GONE);
                 //link.setText(url);
                 textUrl=url;
+                //if(!flag)
                 searchView.setQuery(textUrl,false);
             }
         });
@@ -149,7 +153,6 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
         settings.setDisplayZoomControls(false);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
-        settings.setJavaScriptEnabled(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         if (Build.VERSION.SDK_INT >= 19) {
             WebView.setWebContentsDebuggingEnabled(true);
@@ -196,6 +199,7 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        flag=false;
 
         progressBar.setVisibility(View.VISIBLE);
         textUrl=query;
@@ -217,6 +221,8 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        Log.d("text chnaged","true");
+        flag=true;
         return false;
     }
 

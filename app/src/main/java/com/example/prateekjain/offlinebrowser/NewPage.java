@@ -90,8 +90,8 @@ public class NewPage extends AppCompatActivity {
 
     private void validateAndReturn(View view) {
         String urlToSave=url.getText().toString();
-        if(urlToSave.contains("https"))
-            urlToSave=urlToSave.replace("https","http");
+        /*if(urlToSave.contains("https"))
+            urlToSave=urlToSave.replace("https","http");*/
         if(!urlToSave.contains("http")){
             urlToSave="http://"+urlToSave;
         }
