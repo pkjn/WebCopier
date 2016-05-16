@@ -50,8 +50,6 @@ public class DownloadService extends IntentService {
         super("DownloadService");
     }
 
-
-
     //variable used in downloading
     LinkedList<String> queue;
     String host;
@@ -63,6 +61,7 @@ public class DownloadService extends IntentService {
     boolean pdfDownload=false;
     boolean download_again=false;
     ArrayList<String> all_urls;
+    String baseUri=new String();
     int flag=0;
 
     //function to download images and Scripts
@@ -78,9 +77,18 @@ public class DownloadService extends IntentService {
                     //image.remove();
                     continue;
                 }
-                String src=image.attr("abs:src");
-                Log.d("script-image",src);
+                String src=image.attr("src");
+                Log.d("script",src);
+                if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
+                    String base=new String();
+                    base=baseUri;
+                    src=base+src;
+                    Log.d("script-image","self");
+                }
+                else
+                    src=image.attr("abs:src");
                 src=src.replace("../", "");
+                Log.d("script-image",src);
                 URL url = new URL(src);
                 src=url.getPath();
                 src=getExternalFilesDir(null)+"/"+title+src;
@@ -139,7 +147,19 @@ public class DownloadService extends IntentService {
                 if(counter==max_links_per_page)
                     break;
                 counter++;
-                String src=image.attr("abs:href");
+
+                String src=image.attr("href");
+                Log.d("script",src);
+                if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
+                    String base=new String();
+                    base=baseUri;
+                    src=base+src;
+                    Log.d("script-image","self");
+                }
+                else
+                    src=image.attr("abs:href");
+
+
                 Log.d("styles",src);
                 src=src.replace("../", "");
                 URL url = new URL(src);
@@ -195,7 +215,19 @@ public class DownloadService extends IntentService {
             try{
                 if(link.attr("href").trim().equals("") || link.attr("href").trim().equals("#"))
                     continue;
-                String src=link.attr("abs:href");
+
+                String src=link.attr("href");
+                Log.d("script",src);
+                if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
+                    String base=new String();
+                    base=baseUri;
+                    src=base+src;
+                    Log.d("script-image","self");
+                }
+                else
+                    src=link.attr("abs:href");
+
+
                 if(src.contains(".pdf"))
                     continue;
                 src=src.replace("../", "");
@@ -261,7 +293,15 @@ public class DownloadService extends IntentService {
     public void downloadLink(String s) {
         try {
             URL url1 = new URL(s);
-            String baseUri = url1.getProtocol() + "://" + url1.getHost() + "/";
+
+
+            //redundant code for checking
+            String path = url1.getFile().substring(0, url1.getFile().lastIndexOf('/'));
+            baseUri = url1.getProtocol() + "://" + url1.getHost() + path+"/";
+            Log.d("baseUri",baseUri);
+
+
+            //String baseUri = url1.getProtocol() + "://" + url1.getHost() + "/";
             BufferedReader reader = new BufferedReader(new InputStreamReader(url1.openStream()));
             BufferedWriter writer;
             File file;
