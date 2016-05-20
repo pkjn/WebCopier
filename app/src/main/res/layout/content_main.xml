@@ -24,7 +24,7 @@
                 android:padding="@dimen/fab_size_normal"
                 android:gravity="center_horizontal"
                 android:id="@+id/viewWhenEmpty"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

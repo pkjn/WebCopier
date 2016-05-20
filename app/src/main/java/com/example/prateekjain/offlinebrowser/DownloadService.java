@@ -105,7 +105,6 @@ public class DownloadService extends IntentService {
                                 // TODO handle the response
                                 try {
                                     if (response!=null) {
-
                                         FileOutputStream outputStream;
                                         outputStream = new FileOutputStream(f);
                                         outputStream.write(response);
