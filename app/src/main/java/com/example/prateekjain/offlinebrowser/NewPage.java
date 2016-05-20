@@ -35,7 +35,6 @@ public class NewPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
