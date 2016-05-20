@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -34,8 +35,11 @@ public class NewPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         spinner_depth= (Spinner) findViewById(R.id.depthSpinner);
         spinner_links= (Spinner) findViewById(R.id.linksSpinner);
         url= (EditText) findViewById(R.id.url_webpage);
@@ -172,4 +176,16 @@ public class NewPage extends AppCompatActivity {
         pdf.setChecked(pdfDownload);
         script.setChecked(scriptDownload);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

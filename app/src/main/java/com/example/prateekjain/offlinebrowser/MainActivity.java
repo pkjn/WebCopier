@@ -189,8 +189,11 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
     public List<WebpageDetails> getData(){
         List<WebpageDetails> data=new ArrayList<WebpageDetails>();
         data= Select.from(WebpageDetails.class).orderBy("dateWebpage DESC").fetch();
-        if(data.size()==0)
+        if(data.size()==0){
+            Log.d("viewWhen",data.size()+"");
             viewWhenEmpty.setVisibility(View.VISIBLE);
+        }
+
         return data;
     }
 

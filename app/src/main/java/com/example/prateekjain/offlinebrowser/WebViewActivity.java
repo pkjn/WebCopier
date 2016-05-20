@@ -10,7 +10,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -114,7 +113,6 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 //method to handle PAGE NOT AVAILABLE
-                Log.d("weberror",errorCode+"  :  "+description+"  :  "+failingUrl);
                 if(description.equals("net::ERR_NAME_NOT_RESOLVED")){
                     Snackbar.make(findViewById(android.R.id.content), "Check the URL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     wv1.goBack();
@@ -173,7 +171,6 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_web_view, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
