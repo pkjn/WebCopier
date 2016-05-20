@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
     MyAdapter adapter;
     final String db_name="OfflineBrowser";
     static LinkedList<Intent> download_queue=new LinkedList<>();
+    LinearLayout viewWhenEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         });
         Ollie.with(getApplicationContext())
                 .setName(db_name)
-                .setVersion(2)
-                .setLogLevel(Ollie.LogLevel.FULL)
-                .setCacheSize(1)
+                .setVersion(1)
                 .init();
+        viewWhenEmpty=(LinearLayout)findViewById(R.id.viewWhenEmpty);
         recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
         adapter=new MyAdapter(getApplicationContext(),getData());
         adapter.setClickListener(this);
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         if(!isMyServiceRunning(DownloadService.class))
             adapter.updateDataFirstTime();
         if(getIntent().hasExtra("urlToSave")){
-
             String url =" ";
             if(getIntent().getStringExtra("urlToSave")!=null){
                 url=getIntent().getStringExtra("urlToSave");
@@ -92,6 +92,22 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
             startActivityForResult(intent,2);
         }
 
+
+        //execute when app runs for first time
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("OfflineBrowser", MODE_PRIVATE);
+        boolean firstTime=pref.getBoolean("first_time", true);
+        if(firstTime){
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("first_time", false);
+            editor.commit();
+
+            //create .nomeadia file in order to hide images from gallery
+            try {
+                File dir = getExternalFilesDir(null);
+                File output = new File(dir, ".nomedia");
+                boolean fileCreated = output.createNewFile();
+            }catch (Exception e){Log.d("error in media file",e.toString());}
+        }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -132,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 intent.putExtra("scriptDownload",scriptDownload);
                 intent.putExtra("maxDepth",maxDepth);
                 intent.putExtra("maxLinks", maxLinks);
+                viewWhenEmpty.setVisibility(View.GONE);
                 if(resultCode==2)
                     intent.putExtra("download","false");
                 else
@@ -169,9 +186,11 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         unregisterReceiver(receiver);
     }
 
-    public static List<WebpageDetails> getData(){
+    public List<WebpageDetails> getData(){
         List<WebpageDetails> data=new ArrayList<WebpageDetails>();
         data= Select.from(WebpageDetails.class).orderBy("dateWebpage DESC").fetch();
+        if(data.size()==0)
+            viewWhenEmpty.setVisibility(View.VISIBLE);
         return data;
     }
 
@@ -302,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
+
         });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -327,6 +347,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
+            if(values[0].equals("DELETED")){
+             getData();
+            }
             adapter.editItem(position,total_files,deleted_files,values[0]);
         }
 
@@ -349,7 +372,10 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 }}
             fileOrDirectory.delete();
         }
-    }    @Override
+    }
+
+
+    @Override
     public void settingClicked(View view, int position, WebpageDetails detail) {
         Intent intent=new Intent(getApplicationContext(),NewPage.class);
         intent.putExtra("title",detail.title);

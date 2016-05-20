@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Go Offline</string>
+    <string name="app_name">OffWeb</string>
 
     <string name="action_settings">Settings</string>
 
@@ -23,5 +23,9 @@
     </string-array>
     <string name="depthSpinnerPrompt">1</string>
     <string name="max">100</string>
+    <string name="text1">Click the Add button(+) to add new links</string>
+    <string name="text2">Then click the download button to download</string>
+    <string name="text3">To view the links Offline, click the item in the list</string>
+    <string name="text4">You can choose your default browser options from the Settings Menu</string>
     <string name="title_activity_web_view">WebViewActivity</string>
 </resources>
