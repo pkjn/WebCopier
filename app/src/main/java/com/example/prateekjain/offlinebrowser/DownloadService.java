@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -78,17 +77,14 @@ public class DownloadService extends IntentService {
                     continue;
                 }
                 String src=image.attr("src");
-                Log.d("script",src);
                 if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
                     String base=new String();
                     base=baseUri;
                     src=base+src;
-                    Log.d("script-image","self");
                 }
                 else
                     src=image.attr("abs:src");
                 src=src.replace("../", "");
-                Log.d("script-image",src);
                 URL url = new URL(src);
                 src=url.getPath();
                 src=getExternalFilesDir(null)+"/"+title+src;
@@ -112,7 +108,6 @@ public class DownloadService extends IntentService {
                                     }
                                 } catch (Exception e) {
                                     // TODO Auto-generated catch block
-                                    Log.d("KEY_ERROR", "UNABLE TO DOWNLOAD FILE");
                                     e.printStackTrace();
                                 }
                             }
@@ -148,18 +143,15 @@ public class DownloadService extends IntentService {
                 counter++;
 
                 String src=image.attr("href");
-                Log.d("script",src);
                 if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
                     String base=new String();
                     base=baseUri;
                     src=base+src;
-                    Log.d("script-image","self");
                 }
                 else
                     src=image.attr("abs:href");
 
 
-                Log.d("styles",src);
                 src=src.replace("../", "");
                 URL url = new URL(src);
                 src=url.getPath();
@@ -170,7 +162,7 @@ public class DownloadService extends IntentService {
                     image.attr("href",src);
                     continue;
                 }
-                Log.d("styles not exist",src);
+
                 InputStreamVolleyRequest request = new InputStreamVolleyRequest(Request.Method.GET, url.toString(),
                         new Response.Listener<byte[]>() {
                             @Override
@@ -186,7 +178,7 @@ public class DownloadService extends IntentService {
                                     }
                                 } catch (Exception e) {
                                     // TODO Auto-generated catch block
-                                    Log.d("KEY_ERROR", "UNABLE TO DOWNLOAD FILE");
+
                                     e.printStackTrace();
                                 }
                             }
@@ -216,12 +208,12 @@ public class DownloadService extends IntentService {
                     continue;
 
                 String src=link.attr("href");
-                Log.d("script",src);
+
                 if(!src.startsWith("/") && !src.startsWith("http") && !src.startsWith("../") && !src.startsWith("./")){
                     String base=new String();
                     base=baseUri;
                     src=base+src;
-                    Log.d("script-image","self");
+
                 }
                 else
                     src=link.attr("abs:href");
@@ -231,7 +223,7 @@ public class DownloadService extends IntentService {
                     continue;
                 src=src.replace("../", "");
                 URL url=new URL(src);
-                Log.d("links",src);
+
                 if(!url.getHost().equals(host)){
                     String host_name=url.getHost();
                     int counterr = 0;
@@ -248,7 +240,7 @@ public class DownloadService extends IntentService {
                         continue;
                     }
                 }
-                Log.d("links downloading",src);
+
                 if(!queue.contains(src) && level!=(depth+2) && counter<max_links_per_page){
                     queue.add(src);
                     all_urls.add(src);
@@ -256,7 +248,7 @@ public class DownloadService extends IntentService {
                 }
                 String directory_path=url.getPath();
                 directory_path=getExternalFilesDir(null)+"/"+title+directory_path;
-                Log.d("links downloading path",directory_path);
+
 
                 if(directory_path.endsWith("/"))
                     directory_path+="index.html";
@@ -275,7 +267,7 @@ public class DownloadService extends IntentService {
                 if(!all_urls.contains(src))
                     link.attr("href",url.toString());
 
-            }catch(Exception e){Log.d("Link Error:",e.toString());}
+            }catch(Exception e){}
         }
         return doc;
     }
@@ -297,7 +289,7 @@ public class DownloadService extends IntentService {
             //redundant code for checking
             String path = url1.getFile().substring(0, url1.getFile().lastIndexOf('/'));
             baseUri = url1.getProtocol() + "://" + url1.getHost() + path+"/";
-            Log.d("baseUri",baseUri);
+
 
 
             //String baseUri = url1.getProtocol() + "://" + url1.getHost() + "/";
@@ -325,11 +317,11 @@ public class DownloadService extends IntentService {
                 else if(directory_path.contains(".")){
                     int pos = directory_path.lastIndexOf(".");
                     if(directory_path.substring(pos,directory_path.length()).contains("/")){
-                        Log.d("inside",directory_path);
+
                         directory_path+=".html";
                     }
                     else{
-                        Log.d("outside data",directory_path);
+
                         directory_path=directory_path.substring(0, pos);
                         directory_path+=".html";
                     }
@@ -370,14 +362,14 @@ public class DownloadService extends IntentService {
             writer.write(doc.html());
             writer.close();
         } catch (ConnectException e) {
-            Log.d("Service error", e.toString());
+
             MainActivity.download_queue.clear();
             flag=1;
             publishResults(title_show,"INTERRUPTED",count,queue.size(),max_size);
             stopSelf();
         }
         catch(Exception e){
-            Log.d("exception in links",e.toString());
+
         }
     }
 
@@ -390,7 +382,7 @@ public class DownloadService extends IntentService {
             count++;
             if(max_size<queue.size())
                 max_size=queue.size();
-            Log.d("titles",title_show);
+
             publishResults(title_show,"DOWNLOADING",count,queue.size(),max_size);
             s=queue.poll();
             if(s.equals(Integer.toString(level))){

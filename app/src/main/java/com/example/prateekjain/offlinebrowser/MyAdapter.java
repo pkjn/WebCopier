@@ -2,7 +2,6 @@ package com.example.prateekjain.offlinebrowser;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         WebpageDetails current=data.get(position);
-        Log.d("status",current.title);
         holder.title.setText(current.title);
         if(current.status.equals("DOWNLOADED") || current.status.equals("INTERRUPTED")){
             holder.progressBar.setVisibility(View.GONE);
@@ -129,7 +127,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             WebpageDetails details=(WebpageDetails)ir.next();
             details.save();
         }
-        Log.d("savechanges", "details saved");
     }
 
 

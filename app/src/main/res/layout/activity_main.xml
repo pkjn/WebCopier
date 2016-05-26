@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/black1"
     android:fitsSystemWindows="true"
     tools:context="com.example.prateekjain.offlinebrowser.MainActivity">
 
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppThemeActivity.ActionBar.Transparent">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -24,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/toolbar_background"/>
+                android:background="#07000000"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

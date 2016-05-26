@@ -25,11 +25,11 @@
             android:background="@color/icons"
             android:layout_height="wrap_content">
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="10dp"
                 android:background="@drawable/round_textview"
                 android:layout_margin="3dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" />-->
 
 
             <LinearLayout
@@ -75,6 +75,7 @@
                     android:padding="10dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:background="@color/black"
                     android:id="@+id/cardview_buttons">
 
                     <ImageButton

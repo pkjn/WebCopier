@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ollie.query.Select;
 
@@ -106,12 +108,23 @@ public class NewPage extends AppCompatActivity {
                     .setAction("Action", null).show();
             return;
         } catch (Exception e) {return;}
-        if(title.getText().toString().contains(".")){
+
+
+        //to check for special characters
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(title.getText().toString());
+        if(m.find()){
             Snackbar.make(view, "Title cannot contain Special characters", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             return;
         }
+
+        //to check if it is not empty
         if(title.getText().toString().trim().equals("")){
             Snackbar.make(view, "Title cannot blank", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            return;
+        }
+        if(url.getText().toString().trim().equals("")){
+            Snackbar.make(view, "URL cannot blank", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             return;
         }
 

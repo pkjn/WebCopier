@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
         if(!isMyServiceRunning(DownloadService.class))
             adapter.updateDataFirstTime();
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 File dir = getExternalFilesDir(null);
                 File output = new File(dir, ".nomedia");
                 boolean fileCreated = output.createNewFile();
-            }catch (Exception e){Log.d("error in media file",e.toString());}
+            }catch (Exception e){}
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
         if(resultCode != RESULT_CANCELED) {
-            Log.d("settings","resultcode  :"+resultCode);
+
             if (requestCode == 2) {
                 String url = data.getStringExtra("url");
                 String title = data.getStringExtra("title");
@@ -156,12 +156,12 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
                 if(new ConnectionDetector(getApplicationContext()).isConnectingToInternet()){
                     if(!isMyServiceRunning(DownloadService.class)){
                         startService(intent);
-                        Log.d("settings","service started");
+
                     }
                     else{
                         download_queue.add(intent);
                     }
-                    Log.d("start service called","true");
+
                 }else{
                     adapter.editItem(title, 0,1,"INTERRUPTED",1);
                     Snackbar.make(findViewById(android.R.id.content), "No Network Detected.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         List<WebpageDetails> data=new ArrayList<WebpageDetails>();
         data= Select.from(WebpageDetails.class).orderBy("dateWebpage DESC").fetch();
         if(data.size()==0){
-            Log.d("viewWhen",data.size()+"");
             viewWhenEmpty.setVisibility(View.VISIBLE);
         }
 
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
     @Override
     public void itemClicked(View view, int position,WebpageDetails detail) {
         if(detail.status.equals("DELETED") || detail.status.equals("DELETING")    /* || detail.status.equals("INTERRUPTED")*/  ){
-            Log.d("itemclicked",detail.status);
+
             Snackbar.make(findViewById(android.R.id.content), "Website is Interrupted, Download Again!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             return;
         }
@@ -238,9 +237,9 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String defaultBrowser = prefs.getString("defaultBrowser", "choose");
-        Log.d("default",":"+defaultBrowser+":"+getString(R.string.app_name)+":");
+
         if(defaultBrowser.equals(getString(R.string.app_name))){
-            Log.d("default",defaultBrowser+"  "+getString(R.string.app_name));
+
             Intent i = new Intent(getApplicationContext(),WebViewActivity.class);
             i.setData(Uri.parse(urlVisit));
             startActivity(i);
@@ -248,7 +247,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         else{
             try
             {
-                Log.d("default","inside choose");
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setDataAndType(Uri.parse(urlVisit), "text/html");
                 Intent chooser=Intent.createChooser(i,"Open With");

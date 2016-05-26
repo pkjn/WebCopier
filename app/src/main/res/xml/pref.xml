@@ -5,16 +5,17 @@
         android:title="Select Items To Download" >
         <CheckBoxPreference
             android:key="imageDownload"
-            android:checked="true"
+            android:defaultValue="true"
             android:title="Images" />
 
         <CheckBoxPreference
             android:key="pdfDownload"
+            android:defaultValue="false"
             android:title="Pdf Files" />
 
         <CheckBoxPreference
             android:key="scriptDownload"
-            android:checked="true"
+            android:defaultValue="true"
             android:title="Scripts" />
     </PreferenceCategory>
 
@@ -25,11 +26,13 @@
             android:entryValues="@array/depthValues"
             android:key="maxDepth"
             android:summary="Max Depth Level For Links"
+            android:defaultValue="1"
             android:title="Max Depth" />
         <ListPreference
             android:entries="@array/linkOptions"
             android:entryValues="@array/linkValues"
             android:key="maxLinks"
+            android:defaultValue="50"
             android:summary="Max Links Per Page"
             android:title="Max Links" />
     </PreferenceCategory>
@@ -40,6 +43,7 @@
             android:entries="@array/defaultBrowser"
             android:entryValues="@array/defaultValues"
             android:key="defaultBrowser"
+            android:defaultValue="@string/app_name"
             android:title="Set Default Browser" />
     </PreferenceCategory>
 </PreferenceScreen>  
