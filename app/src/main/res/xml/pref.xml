@@ -32,7 +32,7 @@
             android:entries="@array/linkOptions"
             android:entryValues="@array/linkValues"
             android:key="maxLinks"
-            android:defaultValue="50"
+            android:defaultValue="100"
             android:summary="Max Links Per Page"
             android:title="Max Links" />
     </PreferenceCategory>

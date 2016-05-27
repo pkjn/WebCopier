@@ -4,11 +4,11 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId 'com.example.prateekjain.gooffline'
+        applicationId 'com.prateekjain.webcopier'
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName '1.1'
     }
     buildTypes {
         release {
@@ -36,4 +36,5 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.github.clans:fab:1.6.3'
     compile 'com.github.silvestrpredko:dot-progress-bar:0.1.4@aar'
+    compile files('libs/StartAppInApp-3.4.2.jar')
 }

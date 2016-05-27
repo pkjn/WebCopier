@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
         });
         Ollie.with(getApplicationContext())
                 .setName(db_name)
-                .setVersion(1)
+                .setVersion(2)
                 .init();
         viewWhenEmpty=(LinearLayout)findViewById(R.id.viewWhenEmpty);
         recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
