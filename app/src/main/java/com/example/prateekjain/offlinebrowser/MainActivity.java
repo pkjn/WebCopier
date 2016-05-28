@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.startapp.android.publish.StartAppSDK;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.ClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "204037436", true);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="43dp"
         android:layout_marginRight="8dp"
         android:src="@android:drawable/ic_input_add"
         fab:menu_colorNormal="@color/accent"
@@ -82,5 +82,12 @@
             fab:fab_colorRipple="@color/primary_dark"/>
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <com.startapp.android.publish.banner.Banner
+        android:id="@+id/startAppBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_centerHorizontal="true"/>
 
 </android.support.design.widget.CoordinatorLayout>

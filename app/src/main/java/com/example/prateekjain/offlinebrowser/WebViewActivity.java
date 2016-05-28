@@ -21,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
+import com.startapp.android.publish.StartAppSDK;
 
 public class WebViewActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
     //EditText link;
@@ -33,6 +34,7 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "204037436", true);
         setContentView(R.layout.activity_web_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
