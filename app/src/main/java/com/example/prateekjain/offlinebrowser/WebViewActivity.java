@@ -117,12 +117,10 @@ public class WebViewActivity extends AppCompatActivity implements SearchView.OnQ
                 //method to handle PAGE NOT AVAILABLE
                 if(description.equals("net::ERR_NAME_NOT_RESOLVED")){
                     Snackbar.make(findViewById(android.R.id.content), "Check the URL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    wv1.goBack();
                 }
 
                 if(description.equals("net::ERR_INTERNET_DISCONNECTED")){
                     Snackbar.make(findViewById(android.R.id.content), "Check Your Internet Connection", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    wv1.goBack();
                 }
             }
 
